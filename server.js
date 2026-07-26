@@ -13,6 +13,8 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
+const diaryRoutes = require('./routes/diary');
+const messageRoutes = require('./routes/messages');
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/diary', diaryRoutes);
+app.use('/api/messages', messageRoutes);
 
 // tratador de erro genérico, pra nunca vazar stack trace pro cliente
 app.use((err, req, res, next) => {
