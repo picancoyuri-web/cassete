@@ -12,10 +12,15 @@ function signToken(user) {
 
 function setSessionCookie(res, user) {
   const token = signToken(user);
+  const isProd = process.env.NODE_ENV === 'production';
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    // em produção o front-end normalmente fica num domínio diferente do
+    // backend (ex.: netlify.app vs onrender.com) — nesse caso o cookie
+    // PRECISA de sameSite:'none' + secure:true pra ir junto nas requisições.
+    // Em desenvolvimento local (mesma origem "localhost"), 'lax' já basta.
+    sameSite: isProd ? 'none' : 'lax',
+    secure: isProd,
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 dias
   });
 }
