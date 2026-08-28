@@ -23,6 +23,7 @@ const app = express();
 // pra servir o conteúdo local do app.
 const allowedOrigins = [
   process.env.FRONTEND_ORIGIN || 'http://localhost:5500',
+  'https://cassete.netlify.app', // site em produção (Netlify)
   'capacitor://localhost', // iOS (Capacitor)
   'https://localhost',     // Android (Capacitor)
   'http://localhost',
@@ -50,11 +51,13 @@ app.use('/api/itunes', itunesRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/credits', creditsRoutes);
 app.use('/api/artist-info', artistInfoRoutes);
+
 // tratador de erro genérico, pra nunca vazar stack trace pro cliente
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: 'erro interno do servidor.' });
 });
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Cassete backend rodando em http://localhost:${PORT}`);
