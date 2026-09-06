@@ -18,6 +18,7 @@ function serializeUser(row){
     nationality: row.nationality,
     genres: JSON.parse(row.genres || '[]'),
     avatar: row.avatar || null,
+    spotifyConnected: !!row.spotify_refresh_token,
     followers,
     following,
   };
@@ -35,6 +36,7 @@ function serializePublicUser(row){
     avatar: row.avatar || null,
     nationality: row.nationality,
     genres: JSON.parse(row.genres || '[]'),
+    spotifyConnected: !!row.spotify_refresh_token,
     followerCount,
     followingCount,
   };

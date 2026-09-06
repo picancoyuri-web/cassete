@@ -16,6 +16,7 @@ const itunesRoutes = require('./routes/itunes');
 const notificationRoutes = require('./routes/notifications');
 const creditsRoutes = require('./routes/credits');
 const artistInfoRoutes = require('./routes/artistinfo');
+const spotifyRoutes = require('./routes/spotify');
 const { checkMemories } = require('./utils/reminders');
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/api/itunes', itunesRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/credits', creditsRoutes);
 app.use('/api/artist-info', artistInfoRoutes);
+app.use('/api/spotify', spotifyRoutes);
 // tratador de erro genérico, pra nunca vazar stack trace pro cliente
 app.use((err, req, res, next) => {
   console.error(err);

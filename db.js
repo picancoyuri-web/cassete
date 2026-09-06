@@ -119,5 +119,14 @@ const userColumns = db.prepare("PRAGMA table_info(users)").all().map(c => c.name
 if(!userColumns.includes('email_verified')){
   db.exec('ALTER TABLE users ADD COLUMN email_verified INTEGER NOT NULL DEFAULT 0');
 }
+if(!userColumns.includes('spotify_access_token')){
+  db.exec('ALTER TABLE users ADD COLUMN spotify_access_token TEXT');
+}
+if(!userColumns.includes('spotify_refresh_token')){
+  db.exec('ALTER TABLE users ADD COLUMN spotify_refresh_token TEXT');
+}
+if(!userColumns.includes('spotify_token_expires_at')){
+  db.exec('ALTER TABLE users ADD COLUMN spotify_token_expires_at TEXT');
+}
 
 module.exports = db;
